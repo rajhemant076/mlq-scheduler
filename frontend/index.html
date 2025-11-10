@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLQ Scheduling Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Multilevel Queue Scheduling Simulator</h1>
+            <p>Foreground (Round Robin) + Background (FCFS) with Aging</p>
+        </header>
+
+        <div class="main-content">
+            <div class="control-panel">
+                <h2>Control Panel</h2>
+                
+                <div class="form-section">
+                    <h3>Add Process</h3>
+                    <form id="processForm">
+                        <div class="form-group">
+                            <label>Process Name:</label>
+                            <input type="text" id="processName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Arrival Time:</label>
+                            <input type="number" id="arrivalTime" value="0" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Burst Time:</label>
+                            <input type="number" id="burstTime" value="1" min="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Priority (1-10):</label>
+                            <input type="number" id="priority" value="5" min="1" max="10" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Queue Type:</label>
+                            <select id="queueType" required>
+                                <option value="foreground">Foreground (RR)</option>
+                                <option value="background">Background (FCFS)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit">Add Process</button>
+                    </form>
+                </div>
+
+                <div class="simulation-controls">
+                    <h3>Simulation Controls</h3>
+                    <button id="startSimulation">Start Simulation</button>
+                    <button id="stepSimulation">Step Forward</button>
+                    <button id="saveResults">Save Results</button>
+                    <button id="resetSimulation">Reset</button>
+                </div>
+            </div>
+
+            <div class="simulation-view">
+                <div class="queues">
+                    <div class="queue" id="foregroundQueue">
+                        <h3>Foreground Queue (Round Robin)</h3>
+                        <div class="queue-content" id="foregroundContent"></div>
+                    </div>
+                    
+                    <div class="queue" id="backgroundQueue">
+                        <h3>Background Queue (FCFS)</h3>
+                        <div class="queue-content" id="backgroundContent"></div>
+                    </div>
+                </div>
+
+                <div class="execution-log">
+                    <h3>Execution Log</h3>
+                    <div id="logContent"></div>
+                </div>
+
+                <div class="statistics">
+                    <h3>Statistics</h3>
+                    <div id="statsContent"></div>
+                </div>
+
+                <div class="simulation-history">
+                    <h3>Simulation History</h3>
+                    <button id="loadHistory">Load History</button>
+                    <div id="historyContent"></div>
+                </div>
+
+                <div class="process-list">
+                    <h3>All Processes</h3>
+                    <table id="processTable">
+                        <thead>
+                            <tr>
+                                <th>PID</th>
+                                <th>Name</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Priority</th>
+                                <th>Queue</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="processTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
