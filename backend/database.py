@@ -1,14 +1,22 @@
 import psycopg2
 import os
 from datetime import datetime
+import urllib.parse
 
 class Database:
     def __init__(self):
+        # Get DATABASE_URL from environment
         self.database_url = os.environ.get('DATABASE_URL')
+        print(f"Database URL: {self.database_url}")  # Debug line
         self.init_database()
     
     def get_connection(self):
         try:
+            if not self.database_url:
+                print("DATABASE_URL environment variable is not set")
+                return None
+            
+            # Parse the database URL properly
             conn = psycopg2.connect(self.database_url)
             return conn
         except Exception as e:
@@ -18,6 +26,7 @@ class Database:
     def init_database(self):
         conn = self.get_connection()
         if not conn:
+            print("Cannot initialize database - no connection")
             return
         
         try:
